@@ -5,12 +5,16 @@ const postsControllers = require('../controllers/postControllers.js')
 
 
 // INDEX 
-router.get("/posts", postsControllers.index);
+router.get("/", postsControllers.index);
 
 
 
 // SHOW 
-router.get("/posts/:title", postsControllers.show);
+router.get("/:title", postsControllers.show);
+
+
+// STORE 
+router.post('/', postsControllers.store)
 
 
 

@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
+
+const postsRoutes = require("./routers/posts.js");
 
 // OPTIONAL 
-app.use(express.static("public"));
+// app.use(express.static("public"));
+
 
 const port = 3000;
 const host = "http://127.0.0.1";
@@ -10,10 +14,6 @@ const host = "http://127.0.0.1";
 // const posts = require("./db/posts.js");
 
 // const postsControllers = require('./controllers/postControllers.js')
-
-const postsRoutes = require('./routers/posts.js')
-
-app.use('/posts', postsRoutes)
 
 
 app.listen(port, () => {
@@ -24,3 +24,4 @@ app.get("/", (req, res) => {
   res.send("Express Blog Api Crud Complete");
 });
 
+app.use("/posts", postsRoutes);
