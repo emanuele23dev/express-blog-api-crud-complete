@@ -51,9 +51,35 @@ const store = (req,res) => {
   
 }
 
+const update = (req,res) => {
+
+  const post = posts.find(post => post.title.toLowerCase() === req.params.title)
+
+  if (!post) {
+    res.status(404).json({
+      error: `nessun post con questo titolo ${req.params.titolo}`
+    })
+  }
+
+  post.title = req.body.title
+  post.slug = req.body.slug
+  post.content = req.body.content
+  post.image = req.body.image
+  post.tags = req.body.tags
+
+  fs.writeFileSync('./db/posts.js', `module.exports = ${JSON.stringify(posts, null, 4)}`)
+
+   res.status(200).json({
+     status: 200,
+     data: posts
+   });
+
+}
+
 
 module.exports = {
     index,
     show,
-    store
+    store,
+    update
 }

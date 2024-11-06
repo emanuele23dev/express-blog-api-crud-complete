@@ -16,7 +16,8 @@ router.get("/:title", postsControllers.show);
 // STORE 
 router.post('/', postsControllers.store)
 
-
+// PUT 
+router.put('/:title', postsControllers.update)
 
 
 module.exports = router
