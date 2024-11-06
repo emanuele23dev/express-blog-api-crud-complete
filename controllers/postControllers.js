@@ -76,10 +76,33 @@ const update = (req,res) => {
 
 }
 
+const destroy = (req, res) => {
+
+const post = posts.find((post) => post.title.toLowerCase() === req.params.title)
+
+ if (!post) {
+   res.status(404).json({
+    error: `nessun post con questo titolo ${req.params.title}`})
+ }
+
+const newPosts = posts.filter((post) => post.title.toLowerCase() !== req.params.title)
+
+
+ fs.writeFileSync("./db/posts.js", `module.exports = ${JSON.stringify(newPosts, null, 4)}`);
+
+
+ res.status(200).json({
+  status: 200,
+  data: newPosts
+ })
+
+
+}
 
 module.exports = {
     index,
     show,
     store,
-    update
+    update,
+    destroy
 }
